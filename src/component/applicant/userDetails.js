@@ -75,6 +75,7 @@ const UserDetails = ({ next, appSession }) => {
     return address.match(/^[\w-.]+@([\w-]+.)+[\w-]{2,4}$/g);
   }
 
+  // Change to new method name
   const test = () => {
     if (firstname === "") {
       return true;
@@ -91,7 +92,11 @@ const UserDetails = ({ next, appSession }) => {
     }
     return false;
   };
-
+  /**
+   * Create comments so that other developers understand method purpose
+   * trynext - Purpose
+   */
+  // onHandleNextButton
   const trynext = () => {
     const hasError = test();
     setError(hasError);
