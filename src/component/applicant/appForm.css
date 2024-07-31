@@ -1,4 +1,4 @@
-/* Container for the form */
+/* Container for the form 
 .page {
     position: fixed;
     top: 50%;
@@ -16,7 +16,7 @@
     animation: fadeIn 0.5s ease-in-out;
 }
 
-/* Fade-in animation */
+/* Fade-in animation *
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -26,7 +26,7 @@
     }
 }
 
-/* Form labels */
+/* Form labels *
 .name {
     display: block;
     margin-bottom: 8px;
@@ -35,7 +35,7 @@
     font-family: "Helvetica Neue", sans-serif;
 }
 
-/* Form inputs */
+/* Form inputs *
 .input {
     width: 100%;
     padding: 12px;
@@ -47,39 +47,39 @@
     font-family: "Helvetica Neue", sans-serif;
 }
 
-/* Dropdown styling */
+/* Dropdown styling *
 select.input {
     width: 100%;
     padding: 12px;
-    height: 46px; /* Explicitly set the height to match other inputs */
+    height: 46px; /* Explicitly set the height to match other inputs *
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
     font-size: 16px;
     font-family: "Helvetica Neue", sans-serif;
-    appearance: none; /* Remove default dropdown arrow */
+    appearance: none; /* Remove default dropdown arrow *
     background: url('data:image/svg+xml;utf8,<svg fill="%23000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>')
         no-repeat right 10px center;
     background-color: white;
-    background-size: 16px 16px; /* Adjust the size of the arrow */
-    padding-right: 40px; /* Add space for the arrow */
+    background-size: 16px 16px; /* Adjust the size of the arrow *
+    padding-right: 40px; /* Add space for the arrow *
 }
 
-/* Ensure the select element has the same box-sizing and width as other inputs */
+/* Ensure the select element has the same box-sizing and width as other inputs *
 select {
     box-sizing: border-box;
     width: 100%;
 }
 
-/* Radio buttons container */
+/* Radio buttons container *
 .radio .input {
     display: flex;
     gap: 10px;
     background-color: white;
 }
 
-/* Align labels and inputs */
+/* Align labels and inputs *
 .inputboxes,
 .radio,
 .list {
@@ -93,11 +93,11 @@ select {
 .radio label,
 .list label {
     margin-right: 10px;
-    width: 150px; /* Adjust this width as needed */
+    width: 150px; /* Adjust this width as needed *
     text-align: left;
 }
 
-/* Form buttons */
+/* Form buttons *
 .button {
     width: 100%;
     padding: 12px;
@@ -119,7 +119,7 @@ select {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Error messages */
+/* Error messages *
 .error .invalid {
     color: red;
     font-weight: bold;
@@ -130,17 +130,17 @@ select {
 .dropdown {
     width: 100%;
     padding: 12px;
-    height: 46px; /* Explicitly set the height to match other inputs */
+    height: 46px; /* Explicitly set the height to match other inputs *
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
     font-size: 16px;
     font-family: "Helvetica Neue", sans-serif;
-    appearance: none; /* Remove default dropdown arrow */
+    appearance: none; /* Remove default dropdown arrow *
     background: url('data:image/svg+xml;utf8,<svg fill="%23000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>')
         no-repeat right 10px center;
     background-color: white;
-    background-size: 16px 16px; /* Adjust the size of the arrow */
-    padding-right: 40px; /* Add space for the arrow */
+    background-size: 16px 16px; /* Adjust the size of the arrow *
+    padding-right: 40px; /* Add space for the arrow *
 }
