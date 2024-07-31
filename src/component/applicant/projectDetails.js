@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import "./apppages.css";
+import {
+  TextField,
+  Autocomplete,
+  Button,
+  Grid,
+  Container,
+  Typography,
+  Box,
+} from "@mui/material";
 
 const ProjectDetails = ({ prev, next, appSession }) => {
   const projectDetails = appSession.application.projectDetails;
@@ -22,15 +30,15 @@ const ProjectDetails = ({ prev, next, appSession }) => {
   const [error, setError] = useState(false);
 
   const projectTypeList = [
-    { value: 0, label: "Web Development" },
-    { value: 1, label: "App Development" },
-    { value: 2, label: "Machine Learning" },
+    { value: "Web Development", label: "Web Development" },
+    { value: "App Development", label: "App Development" },
+    { value: "Machine Learning", label: "Machine Learning" },
   ];
 
-  const locationlist = [
-    { value: 0, label: "Bangalore" },
-    { value: 1, label: "Hyderabad" },
-    { value: 2, label: "Chennai" },
+  const locationList = [
+    { value: "Hyderabad", label: "Bangalore" },
+    { value: "Hyderabad", label: "Hyderabad" },
+    { value: "Chennai", label: "Chennai" },
   ];
 
   const changeProjectName = (event) => {
@@ -79,8 +87,10 @@ const ProjectDetails = ({ prev, next, appSession }) => {
       location === ""
     ) {
       setError(true);
+      return true;
     } else {
       setError(false);
+      return false;
     }
   };
 
@@ -100,126 +110,156 @@ const ProjectDetails = ({ prev, next, appSession }) => {
   };
 
   return (
-    <div className="page">
-      <div className="list">
-        <label className="name"> Project type: </label>
-        <select
-          className="dropdown"
-          value={projectType}
-          onChange={(a) => setProjectType(a.target.value)}
-        >
-          <option value="">Select</option>
-          {projectTypeList.map((type) => (
-            <option value={type.value}>{type.label}</option>
-          ))}
-        </select>
-        <div className="error">
-          {error === true && projectType === "" ? (
-            <label className="invalid">Please chose a project type</label>
-          ) : null}
-        </div>
-      </div>
-
-      <div className="inputboxes">
-        <label className="name">Project Name: </label>
-        <input
-          onChange={changeProjectName}
-          value={projectName}
-          className="input"
-          placeholder="ex: Project Name"
-        ></input>
-        <div className="error">
-          {error === true && projectName === "" ? (
-            <label className="invalid">Please enter a project name</label>
-          ) : null}
-        </div>
-      </div>
-
-      <div className="inputboxes">
-        <label className="name">Project Number: </label>
-        <input
-          onChange={changeProjectNumber}
-          value={projectNumber}
-          className="input"
-          placeholder="ex: A1234"
-        ></input>
-        <div className="error">
-          {error === true && projectNumber === "" ? (
-            <label className="invalid">
-              Please enter a valid Project Number
-            </label>
-          ) : null}
-        </div>
-      </div>
-
-      <div className="textinput">
-        <label className="name">Description: </label>
-        <textarea
-          onChange={changeProjectDescription}
-          value={projectDescription}
-          className="textarea"
-          placeholder="ex: Project Description"
-        ></textarea>
-        <div className="error">
-          {error === true && projectDescription === "" ? (
-            <label className="invalid">
-              Please enter a project description
-            </label>
-          ) : null}
-        </div>
-      </div>
-
-      <div className="inputboxes">
-        <label className="name">Start Date: </label>
-        <input type="date" onChange={changeStartDate} value={startDate} />
-        <div className="error">
-          {error === true && startDate === "" ? (
-            <label className="invalid">Please enter a start date</label>
-          ) : null}
-        </div>
-      </div>
-
-      <div className="inputboxes">
-        <label className="name">End Date: </label>
-        <input type="date" onChange={changeEndDate} value={endDate} />
-        <div className="error">
-          {error === true && endDate === "" ? (
-            <label className="invalid">Please enter a end date</label>
-          ) : null}
-        </div>
-      </div>
-
-      <div className="list">
-        <label className="name"> Location: </label>
-        <select
-          className="dropdown"
-          value={location}
-          onChange={(a) => setLocation(a.target.value)}
-        >
-          <option value="">Select</option>
-          {locationlist.map((edu) => (
-            <option value={edu.value}>{edu.label}</option>
-          ))}
-        </select>
-        <div className="error">
-          {error === true && location === "" ? (
-            <label className="invalid">Please chose your education</label>
-          ) : null}
-        </div>
-      </div>
-
-      <div className="buttons">
-        <button className="button" onClick={prev}>
-          Previous
-        </button>
-        <button className="button" onClick={reset}>
-          Reset
-        </button>
-        <button className="button" onClick={trynext}>
-          Next
-        </button>
-      </div>
-    </div>
+    <Container maxWidth="sm">
+      <Typography variant="h4" gutterBottom>
+        Project Details
+      </Typography>
+      <Box
+        sx={{
+          padding: 3,
+          border: "1px solid #ccc",
+          borderRadius: 2,
+          boxShadow: 2,
+        }}
+      >
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Autocomplete
+              options={projectTypeList}
+              getOptionLabel={(option) => option.label}
+              value={
+                projectTypeList.find((type) => type.value === projectType) ||
+                null
+              }
+              onChange={(event, newValue) =>
+                setProjectType(newValue ? newValue.value : "")
+              }
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Project Type"
+                  error={error && projectType === ""}
+                  helperText={
+                    error && projectType === ""
+                      ? "Please choose a project type"
+                      : ""
+                  }
+                />
+              )}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="Project Name"
+              value={projectName}
+              onChange={changeProjectName}
+              error={error && projectName === ""}
+              helperText={
+                error && projectName === "" ? "Please enter a project name" : ""
+              }
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="Project Number"
+              value={projectNumber}
+              onChange={changeProjectNumber}
+              error={error && projectNumber === ""}
+              helperText={
+                error && projectNumber === ""
+                  ? "Please enter a valid project number"
+                  : ""
+              }
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="Project Description"
+              value={projectDescription}
+              onChange={changeProjectDescription}
+              error={error && projectDescription === ""}
+              helperText={
+                error && projectDescription === ""
+                  ? "Please enter a project description"
+                  : ""
+              }
+              multiline
+              rows={4}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="Start Date"
+              type="date"
+              InputLabelProps={{ shrink: true }}
+              value={startDate}
+              onChange={changeStartDate}
+              error={error && startDate === ""}
+              helperText={
+                error && startDate === "" ? "Please enter a start date" : ""
+              }
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="End Date"
+              type="date"
+              InputLabelProps={{ shrink: true }}
+              value={endDate}
+              onChange={changeEndDate}
+              error={error && endDate === ""}
+              helperText={
+                error && endDate === "" ? "Please enter an end date" : ""
+              }
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Autocomplete
+              options={locationList}
+              getOptionLabel={(option) => option.label}
+              value={locationList.find((loc) => loc.value === location) || null}
+              onChange={(event, newValue) =>
+                setLocation(newValue ? newValue.value : "")
+              }
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Location"
+                  error={error && location === ""}
+                  helperText={
+                    error && location === "" ? "Please choose a location" : ""
+                  }
+                />
+              )}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Grid container spacing={2}>
+              <Grid item>
+                <Button variant="outlined" onClick={prev}>
+                  Previous
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button variant="contained" color="primary" onClick={trynext}>
+                  Next
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button variant="outlined" onClick={reset}>
+                  Reset
+                </Button>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Box>
+    </Container>
   );
 };
 

@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 
 import Application from "./component/applicant/application";
@@ -11,9 +10,7 @@ import "@fontsource/roboto/700.css";
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>User Registration Work Flow</h1>
-      </header>
+      <header className="App-header"></header>
       <div>
         <Application />
       </div>

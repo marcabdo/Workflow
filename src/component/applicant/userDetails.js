@@ -6,13 +6,12 @@ import {
   Radio,
   FormControl,
   FormLabel,
-  Select,
-  MenuItem,
-  InputLabel,
+  Autocomplete,
   Button,
   Grid,
   Container,
   Typography,
+  Box,
 } from "@mui/material";
 
 const UserDetails = ({ next, appSession }) => {
@@ -29,9 +28,9 @@ const UserDetails = ({ next, appSession }) => {
 
   // Preset education list
   const educationlist = [
-    { value: 0, label: "B.Tech" },
-    { value: 1, label: "M.Tech" },
-    { value: 2, label: "MBBS" },
+    { value: "B.Tech", label: "B.Tech" },
+    { value: "M.Tech", label: "M.Tech" },
+    { value: "MBBS", label: "MBBS" },
   ];
 
   // Functions to change state
@@ -112,112 +111,131 @@ const UserDetails = ({ next, appSession }) => {
       <Typography variant="h4" gutterBottom>
         User Details
       </Typography>
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <TextField
-            fullWidth
-            label="First Name"
-            value={firstname}
-            onChange={changeFirst}
-            error={error && firstname === ""}
-            helperText={
-              error && firstname === "" ? "Please enter your first name" : ""
-            }
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            fullWidth
-            label="Last Name"
-            value={lastname}
-            onChange={changeLast}
-            error={error && lastname === ""}
-            helperText={
-              error && lastname === "" ? "Please enter your last name" : ""
-            }
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            fullWidth
-            label="Phone Number"
-            value={number}
-            onChange={changeNum}
-            error={error && (number === "" || number.length < 10)}
-            helperText={
-              error && (number === "" || number.length < 10)
-                ? "Please enter a valid phone number"
-                : ""
-            }
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            fullWidth
-            label="Email Address"
-            value={email}
-            onChange={changeEmail}
-            error={error && (email === "" || !isValidEmailAddress(email))}
-            helperText={
-              error && (email === "" || !isValidEmailAddress(email))
-                ? "Please enter a valid email address"
-                : ""
-            }
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <FormControl
-            component="fieldset"
-            error={error && gender === undefined}
-          >
-            <FormLabel component="legend">Gender</FormLabel>
-            <RadioGroup
-              row
-              value={gender}
-              onChange={(e) => setGender(e.target.value)}
+      <Box
+        sx={{
+          padding: 3,
+          border: "1px solid #ccc",
+          borderRadius: 2,
+          boxShadow: 2,
+        }}
+      >
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="First Name"
+              value={firstname}
+              onChange={changeFirst}
+              error={error && firstname === ""}
+              helperText={
+                error && firstname === "" ? "Please enter your first name" : ""
+              }
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="Last Name"
+              value={lastname}
+              onChange={changeLast}
+              error={error && lastname === ""}
+              helperText={
+                error && lastname === "" ? "Please enter your last name" : ""
+              }
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="Phone Number"
+              value={number}
+              onChange={changeNum}
+              error={error && (number === "" || number.length < 10)}
+              helperText={
+                error && (number === "" || number.length < 10)
+                  ? "Please enter a valid phone number"
+                  : ""
+              }
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="Email Address"
+              value={email}
+              onChange={changeEmail}
+              error={error && (email === "" || !isValidEmailAddress(email))}
+              helperText={
+                error && (email === "" || !isValidEmailAddress(email))
+                  ? "Please enter a valid email address"
+                  : ""
+              }
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <FormControl
+              component="fieldset"
+              error={error && gender === undefined}
             >
-              <FormControlLabel value="Male" control={<Radio />} label="Male" />
-              <FormControlLabel
-                value="Female"
-                control={<Radio />}
-                label="Female"
-              />
-            </RadioGroup>
-          </FormControl>
-        </Grid>
-        <Grid item xs={12}>
-          <FormControl fullWidth error={error && education === ""}>
-            <InputLabel>Education</InputLabel>
-            <Select
-              value={education}
-              onChange={(a) => setEducation(a.target.value)}
-            >
-              <MenuItem value="">
-                <em>Select</em>
-              </MenuItem>
-              {educationlist.map((edu) => (
-                <MenuItem key={edu.value} value={edu.value}>
-                  {edu.label}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item xs={12}>
-          <Grid container spacing={2}>
-            <Grid item>
-              <Button variant="contained" color="primary" onClick={trynext}>
-                Next
-              </Button>
-            </Grid>
-            <Grid item>
-              <Button variant="outlined" onClick={reset}>
-                Reset
-              </Button>
+              <FormLabel component="legend">Gender</FormLabel>
+              <RadioGroup
+                row
+                value={gender}
+                onChange={(e) => setGender(e.target.value)}
+              >
+                <FormControlLabel
+                  value="Male"
+                  control={<Radio />}
+                  label="Male"
+                />
+                <FormControlLabel
+                  value="Female"
+                  control={<Radio />}
+                  label="Female"
+                />
+              </RadioGroup>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12}>
+            <Autocomplete
+              options={educationlist}
+              getOptionLabel={(option) => option.label}
+              value={
+                educationlist.find((edu) => edu.value === education) || null
+              }
+              onChange={(event, newValue) =>
+                setEducation(newValue ? newValue.value : "")
+              }
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Education"
+                  error={error && education === ""}
+                  helperText={
+                    error && education === ""
+                      ? "Please choose your education"
+                      : ""
+                  }
+                />
+              )}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Grid container spacing={2}>
+              <Grid item>
+                <Button variant="contained" color="primary" onClick={trynext}>
+                  Next
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button variant="outlined" onClick={reset}>
+                  Reset
+                </Button>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      </Box>
     </Container>
   );
 };
