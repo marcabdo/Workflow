@@ -8,15 +8,34 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import { Button } from "@mui/material";
 
 function App() {
+  const [darkMode, setDarkMode] = useState("light");
+  const darkTheme = createTheme({
+    palette: {
+      mode: darkMode,
+    },
+  });
+  const toggleMode = () => {
+    setDarkMode(darkMode === "light" ? "dark" : "light");
+  };
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Application />} />
-        <Route path="/21" element={<ApprovalProcess />} />
-      </Routes>
-    </BrowserRouter>
+    <div>
+      <Button onClick={toggleMode}>Light/Dark</Button>
+      <BrowserRouter>
+        <ThemeProvider theme={darkTheme}>
+          <CssBaseline />
+          <Routes>
+            <Route path="/" element={<Application />} />
+            <Route path="/21" element={<ApprovalProcess />} />
+          </Routes>
+        </ThemeProvider>
+      </BrowserRouter>
+    </div>
   );
 }
 
