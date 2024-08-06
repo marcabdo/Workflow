@@ -12,7 +12,7 @@ const ViewApplication = () => {
   const prev = () => {
     setCurrentStep((prevStep) => prevStep - 1);
   };
-
+  // Switch Case to switch between ViewUser and ViewProject tabs
   const renderStep = () => {
     switch (currentStep) {
       case 1:

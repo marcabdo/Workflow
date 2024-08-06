@@ -65,7 +65,7 @@ const ProjectDetails = ({ prev, next, appSession }) => {
     const newEndDate = event.target.value;
     setEndDate(newEndDate);
   };
-
+  // Reset button values
   const reset = () => {
     setProjectType("");
     setProjectName("");
@@ -93,7 +93,7 @@ const ProjectDetails = ({ prev, next, appSession }) => {
       return false;
     }
   };
-
+  // Test function for determining all of the inputs are valid, if valid save data in projectDetails
   const trynext = () => {
     const hasError = test();
     setError(hasError);

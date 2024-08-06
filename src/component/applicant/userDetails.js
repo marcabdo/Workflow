@@ -33,7 +33,7 @@ const UserDetails = ({ next, appSession }) => {
     { value: "MBBS", label: "MBBS" },
   ];
 
-  // Functions to change state
+  // Functions to change state of each variable
   const changeFirst = (event) => {
     const newfirst = event.target.value;
     setFirst(newfirst);
@@ -56,6 +56,7 @@ const UserDetails = ({ next, appSession }) => {
     setEmail(newemail);
   };
 
+  // Declaring reset button values
   const reset = () => {
     setFirst("");
     setLast("");
@@ -65,12 +66,12 @@ const UserDetails = ({ next, appSession }) => {
     setEducation("");
     setError(false);
   };
-
+  // Function to verify correct inputs in alphabetic character fields
   function isAlphabetic(str) {
     if (str.length === 0) return false;
     return !/^\d+$/.test(str);
   }
-
+  // Function to verify correct input in email address format
   function isValidEmailAddress(address) {
     return address.match(/^[\w-.]+@([\w-]+.)+[\w-]{2,4}$/g);
   }
@@ -92,11 +93,7 @@ const UserDetails = ({ next, appSession }) => {
     }
     return false;
   };
-  /**
-   * Create comments so that other developers understand method purpose
-   * trynext - Purpose
-   */
-  // onHandleNextButton
+  // Test function to verify correct inputs, if all are valid then save values in userDetails
   const trynext = () => {
     const hasError = test();
     setError(hasError);

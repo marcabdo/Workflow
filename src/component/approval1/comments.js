@@ -11,6 +11,7 @@ import {
 import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
 import Popup from "reactjs-popup";
 
+// Declare Comments, id, and row array for later storage
 const Comments = () => {
   const [comment, setComment] = useState("");
   const [id, setId] = useState(0);
@@ -19,7 +20,9 @@ const Comments = () => {
   const handleDeleteClick = (id) => {
     setRows((prevRows) => prevRows.filter((row) => row.id !== id));
   };
-
+  /* addComment adds a new comment row, and adds one to previous comment ID#. 
+Also sets comment text box to an empty string to prepare for new comments
+*/
   const addComment = () => {
     setId((prevId) => prevId + 1);
     const newRows = {
@@ -31,11 +34,12 @@ const Comments = () => {
     setRows((prevRows) => [...prevRows, newRows]);
     setComment("");
   };
-
+  // Declare Columns
   const columns = [
     { field: "col1", headerName: "Column 1", width: 150 },
     { field: "col2", headerName: "Column 2", width: 150 },
     { field: "col3", headerName: "Column 3", width: 150 },
+    // Add delete functionality, as well as secondary confirmation popup to delete row data
     {
       field: "actions",
       type: "actions",
@@ -98,6 +102,7 @@ const Comments = () => {
     },
   ];
 
+  // Create Datagrid, Add Comment popup with cancel and submit buttons, Add comment button, and basic styling
   return (
     <Container maxWidth="md">
       <Box
