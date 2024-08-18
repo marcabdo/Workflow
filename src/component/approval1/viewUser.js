@@ -42,6 +42,7 @@ const ViewUser = ({ next }) => {
           fullWidth
           value={firstName}
           disabled
+          sx={{ marginBottom: 2 }}
         />
         <TextField
           label={lastName}
@@ -49,6 +50,7 @@ const ViewUser = ({ next }) => {
           fullWidth
           value={lastName}
           disabled
+          sx={{ marginBottom: 2 }}
         />
         <TextField
           label={number}
@@ -56,6 +58,7 @@ const ViewUser = ({ next }) => {
           fullWidth
           value={number}
           disabled
+          sx={{ marginBottom: 2 }}
         />
         <TextField
           label={email}
@@ -63,6 +66,7 @@ const ViewUser = ({ next }) => {
           fullWidth
           value={email}
           disabled
+          sx={{ marginBottom: 2 }}
         />
         <TextField
           label={gender}
@@ -70,6 +74,7 @@ const ViewUser = ({ next }) => {
           fullWidth
           value={gender}
           disabled
+          sx={{ marginBottom: 2 }}
         />
         <TextField
           label={education}
@@ -77,6 +82,7 @@ const ViewUser = ({ next }) => {
           fullWidth
           value={education}
           disabled
+          sx={{ marginBottom: 2 }}
         />
       </Box>
       <Grid container spacing={2}>

@@ -43,6 +43,7 @@ const ViewProject = ({ prev }) => {
           fullWidth
           value={projectType}
           disabled
+          sx={{ marginBottom: 2 }}
         />
         <TextField
           label={projectName}
@@ -50,13 +51,7 @@ const ViewProject = ({ prev }) => {
           fullWidth
           value={projectName}
           disabled
-        />
-        <TextField
-          label={projectNumber}
-          variant="outlined"
-          fullWidth
-          value={projectNumber}
-          disabled
+          sx={{ marginBottom: 2 }}
         />
         <TextField
           label={projectDescription}
@@ -64,6 +59,7 @@ const ViewProject = ({ prev }) => {
           fullWidth
           value={projectDescription}
           disabled
+          sx={{ marginBottom: 2 }}
         />
         <TextField
           label={startDate}
@@ -71,6 +67,7 @@ const ViewProject = ({ prev }) => {
           fullWidth
           value={startDate}
           disabled
+          sx={{ marginBottom: 2 }}
         />
         <TextField
           label={endDate}
@@ -78,6 +75,7 @@ const ViewProject = ({ prev }) => {
           fullWidth
           value={endDate}
           disabled
+          sx={{ marginBottom: 2 }}
         />
         <TextField
           label={location}
@@ -85,6 +83,7 @@ const ViewProject = ({ prev }) => {
           fullWidth
           value={location}
           disabled
+          sx={{ marginBottom: 2 }}
         />
       </Box>
       <Grid container spacing={2}>
