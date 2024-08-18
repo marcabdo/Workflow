@@ -30,6 +30,7 @@ const Reply = () => {
           borderRadius: 2,
           boxShadow: 2,
           marginTop: 3,
+          transform: "translate(-3%, 0%)",
         }}
       >
         <Typography variant="h6" gutterBottom>

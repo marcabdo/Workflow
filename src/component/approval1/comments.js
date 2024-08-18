@@ -111,6 +111,7 @@ Also sets comment text box to an empty string to prepare for new comments
           border: "1px solid #ccc",
           borderRadius: 2,
           boxShadow: 2,
+          transform: "translate(-3%, 0%)",
         }}
       >
         <DataGrid

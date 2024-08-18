@@ -103,6 +103,7 @@ const Attachements = () => {
           borderRadius: 2,
           boxShadow: 2,
           height: "auto",
+          transform: "translate(-3%, 0%)",
         }}
       >
         <DataGrid

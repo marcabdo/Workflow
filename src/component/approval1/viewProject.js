@@ -25,9 +25,38 @@ const ViewProject = ({ prev }) => {
 
   return (
     <Container maxWidth="sm">
-      <Typography variant="h4" gutterBottom>
-        View Project
-      </Typography>
+      <Box
+        sx={{
+          marginBottom: 2,
+          transform: "translate(-27%, 0%)",
+        }}
+      >
+        <Typography
+          variant="h5"
+          gutterBottom
+          display="inline"
+          padding={1}
+          border="1px solid #ccc"
+          borderRadius={2}
+          boxShadow={2}
+          color="grey"
+        >
+          View User
+        </Typography>
+        <Typography
+          variant="h5"
+          gutterBottom
+          display="inline"
+          padding={1}
+          border="1px solid #ccc"
+          borderRadius={2}
+          boxShadow={2}
+          backgroundColor="#a9a9a9"
+          color="white"
+        >
+          View Project
+        </Typography>
+      </Box>
       <Box
         sx={{
           padding: 3,
@@ -35,6 +64,7 @@ const ViewProject = ({ prev }) => {
           borderRadius: 2,
           boxShadow: 2,
           marginBottom: 2,
+          transform: "translate(-27%, 0%)",
         }}
       >
         <TextField
@@ -88,7 +118,11 @@ const ViewProject = ({ prev }) => {
       </Box>
       <Grid container spacing={2}>
         <Grid item>
-          <Button variant="outlined" onClick={prev}>
+          <Button
+            variant="outlined"
+            onClick={prev}
+            sx={{ transform: "translate(-217%, 0%)" }}
+          >
             Back
           </Button>
         </Grid>

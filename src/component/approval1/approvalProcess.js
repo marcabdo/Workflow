@@ -1,19 +1,13 @@
-import React, { useState, Component } from "react";
+import React, { useState } from "react";
 import ViewApplication from "./viewApplication.js";
 import Attachments from "./attachments.js";
 import Comments from "./comments.js";
 import Reply from "./reply.js";
-import {
-  TextField,
-  Button,
-  Grid,
-  Container,
-  Typography,
-  Box,
-} from "@mui/material";
+import { Button, Container, Grid, Box } from "@mui/material";
 
 const ApprovalProcess = () => {
   const [page, setPage] = useState(1);
+
   const renderPage = () => {
     switch (page) {
       case 1:
@@ -24,7 +18,6 @@ const ApprovalProcess = () => {
         return <Attachments />;
       case 4:
         return <Reply />;
-
       default:
         return <ViewApplication />;
     }
@@ -32,12 +25,67 @@ const ApprovalProcess = () => {
 
   return (
     <Container maxWidth="md">
-      <Button onClick={() => setPage(1)}>View Application</Button>
-      <Button onClick={() => setPage(2)}>Comments</Button>
-      <Button onClick={() => setPage(3)}>Attachments</Button>
-      <Button onClick={() => setPage(4)}>Reply</Button>
-      <div className="page">{renderPage()}</div>
+      <Box sx={{ marginBottom: 4 }}>
+        <Grid container spacing={2}>
+          <Grid item>
+            <Button
+              variant="contained"
+              onClick={() => setPage(1)}
+              sx={{
+                backgroundColor: "#a9a9a9",
+                fontSize: "1rem",
+                padding: "10px 20px",
+              }}
+            >
+              View Application
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button
+              variant="contained"
+              onClick={() => setPage(2)}
+              sx={{
+                backgroundColor: "#a9a9a9",
+                fontSize: "1rem",
+                padding: "10px 20px",
+              }}
+            >
+              Comments
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button
+              variant="contained"
+              onClick={() => setPage(3)}
+              sx={{
+                backgroundColor: "#a9a9a9",
+                fontSize: "1rem",
+                padding: "10px 20px",
+              }}
+            >
+              Attachments
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button
+              variant="contained"
+              onClick={() => setPage(4)}
+              sx={{
+                backgroundColor: "#a9a9a9",
+                fontSize: "1rem",
+                padding: "10px 20px",
+              }}
+            >
+              Reply
+            </Button>
+          </Grid>
+        </Grid>
+      </Box>
+      <Box sx={{ marginTop: 4 }}>
+        <div className="page">{renderPage()}</div>
+      </Box>
     </Container>
   );
 };
+
 export default ApprovalProcess;

@@ -24,9 +24,38 @@ const ViewUser = ({ next }) => {
 
   return (
     <Container maxWidth="sm">
-      <Typography variant="h4" gutterBottom>
-        View User
-      </Typography>
+      <Box
+        sx={{
+          marginBottom: 2,
+          transform: "translate(-27%, 0%)",
+        }}
+      >
+        <Typography
+          variant="h5"
+          gutterBottom
+          display="inline"
+          padding={1}
+          border="1px solid #ccc"
+          borderRadius={2}
+          boxShadow={2}
+          backgroundColor="#a9a9a9"
+          color="white"
+        >
+          View User
+        </Typography>
+        <Typography
+          variant="h5"
+          gutterBottom
+          display="inline"
+          padding={1}
+          border="1px solid #ccc"
+          borderRadius={2}
+          boxShadow={2}
+          color="grey"
+        >
+          View Project
+        </Typography>
+      </Box>
       <Box
         sx={{
           padding: 3,
@@ -34,6 +63,7 @@ const ViewUser = ({ next }) => {
           borderRadius: 2,
           boxShadow: 2,
           marginBottom: 2,
+          transform: "translate(-27%, 0%)",
         }}
       >
         <TextField
@@ -87,7 +117,11 @@ const ViewUser = ({ next }) => {
       </Box>
       <Grid container spacing={2}>
         <Grid item>
-          <Button variant="outlined" onClick={next}>
+          <Button
+            variant="outlined"
+            onClick={next}
+            sx={{ transform: "translate(-217%, 0%)" }}
+          >
             Next
           </Button>
         </Grid>
