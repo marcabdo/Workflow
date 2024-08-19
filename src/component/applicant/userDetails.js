@@ -13,11 +13,44 @@ import {
   Typography,
   Box,
 } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import "@fontsource/roboto"; // Import Roboto font
+
+// Define your theme with the chosen color palette and font settings
+const theme = createTheme({
+  typography: {
+    fontFamily: "Roboto, Arial, sans-serif",
+    h4: {
+      fontWeight: 700, // Bold for headings
+    },
+    body1: {
+      fontWeight: 400, // Regular for body text
+    },
+  },
+  palette: {
+    primary: {
+      main: "#003366", // Navy Blue
+    },
+    secondary: {
+      main: "#4169E1", // Royal Blue
+    },
+    text: {
+      primary: "#000000", // Black for primary text
+      secondary: "#4D4D4D", // Dark Gray for secondary text
+    },
+    background: {
+      default: "#FFFFFF", // White background
+      paper: "#F8F8F8", // Light Gray for paper elements
+    },
+    grey: {
+      300: "#D3D3D3", // Light Gray
+    },
+  },
+});
 
 const UserDetails = ({ next, appSession }) => {
   const userDetails = appSession.application.userDetails;
 
-  // All entries are stored in state
   const [firstname, setFirst] = useState(userDetails.firstname || "");
   const [lastname, setLast] = useState(userDetails.lastname || "");
   const [number, setNumber] = useState(userDetails.number || "");
@@ -26,37 +59,30 @@ const UserDetails = ({ next, appSession }) => {
   const [education, setEducation] = useState(userDetails.education || "");
   const [error, setError] = useState(false);
 
-  // Preset education list
   const educationlist = [
     { value: "B.Tech", label: "B.Tech" },
     { value: "M.Tech", label: "M.Tech" },
     { value: "MBBS", label: "MBBS" },
   ];
 
-  // Functions to change state of each variable
   const changeFirst = (event) => {
-    const newfirst = event.target.value;
-    setFirst(newfirst);
+    setFirst(event.target.value);
   };
 
   const changeLast = (event) => {
-    const newlast = event.target.value;
-    setLast(newlast);
+    setLast(event.target.value);
   };
 
   const changeNum = (event) => {
     if (event.target.value.length < 11 && !isAlphabetic(event.target.value)) {
-      const newnumber = event.target.value;
-      setNumber(newnumber);
+      setNumber(event.target.value);
     }
   };
 
   const changeEmail = (event) => {
-    const newemail = event.target.value;
-    setEmail(newemail);
+    setEmail(event.target.value);
   };
 
-  // Declaring reset button values
   const reset = () => {
     setFirst("");
     setLast("");
@@ -66,34 +92,28 @@ const UserDetails = ({ next, appSession }) => {
     setEducation("");
     setError(false);
   };
-  // Function to verify correct inputs in alphabetic character fields
+
   function isAlphabetic(str) {
-    if (str.length === 0) return false;
     return !/^\d+$/.test(str);
   }
-  // Function to verify correct input in email address format
+
   function isValidEmailAddress(address) {
-    return address.match(/^[\w-.]+@([\w-]+.)+[\w-]{2,4}$/g);
+    return /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(address);
   }
 
-  // Change to new method name
   const test = () => {
-    if (firstname === "") {
-      return true;
-    } else if (lastname === "") {
-      return true;
-    } else if (number === "" || number.length < 10) {
-      return true;
-    } else if (email === "" || !isValidEmailAddress(email)) {
-      return true;
-    } else if (gender === undefined) {
-      return true;
-    } else if (education === "") {
-      return true;
-    }
-    return false;
+    return (
+      firstname === "" ||
+      lastname === "" ||
+      number === "" ||
+      number.length < 10 ||
+      email === "" ||
+      !isValidEmailAddress(email) ||
+      gender === undefined ||
+      education === ""
+    );
   };
-  // Test function to verify correct inputs, if all are valid then save values in userDetails
+
   const trynext = () => {
     const hasError = test();
     setError(hasError);
@@ -109,136 +129,159 @@ const UserDetails = ({ next, appSession }) => {
   };
 
   return (
-    <Container maxWidth="sm">
-      <Typography variant="h4" gutterBottom>
-        User Details
-      </Typography>
+    <ThemeProvider theme={theme}>
+      {/* Background gradient covering the entire page */}
       <Box
         sx={{
-          padding: 3,
-          border: "1px solid #ccc",
-          borderRadius: 2,
-          boxShadow: 2,
+          backgroundImage: "linear-gradient(135deg, #003366, #4169E1)", // Navy Blue to Royal Blue gradient
+          minHeight: "100vh", // Ensures gradient covers the full height of the viewport
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              label="First Name"
-              value={firstname}
-              onChange={changeFirst}
-              error={error && firstname === ""}
-              helperText={
-                error && firstname === "" ? "Please enter your first name" : ""
-              }
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              label="Last Name"
-              value={lastname}
-              onChange={changeLast}
-              error={error && lastname === ""}
-              helperText={
-                error && lastname === "" ? "Please enter your last name" : ""
-              }
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              label="Phone Number"
-              value={number}
-              onChange={changeNum}
-              error={error && (number === "" || number.length < 10)}
-              helperText={
-                error && (number === "" || number.length < 10)
-                  ? "Please enter a valid phone number"
-                  : ""
-              }
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              label="Email Address"
-              value={email}
-              onChange={changeEmail}
-              error={error && (email === "" || !isValidEmailAddress(email))}
-              helperText={
-                error && (email === "" || !isValidEmailAddress(email))
-                  ? "Please enter a valid email address"
-                  : ""
-              }
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <FormControl
-              component="fieldset"
-              error={error && gender === undefined}
-            >
-              <FormLabel component="legend">Gender</FormLabel>
-              <RadioGroup
-                row
-                value={gender}
-                onChange={(e) => setGender(e.target.value)}
-              >
-                <FormControlLabel
-                  value="Male"
-                  control={<Radio />}
-                  label="Male"
-                />
-                <FormControlLabel
-                  value="Female"
-                  control={<Radio />}
-                  label="Female"
-                />
-              </RadioGroup>
-            </FormControl>
-          </Grid>
-          <Grid item xs={12}>
-            <Autocomplete
-              options={educationlist}
-              getOptionLabel={(option) => option.label}
-              value={
-                educationlist.find((edu) => edu.value === education) || null
-              }
-              onChange={(event, newValue) =>
-                setEducation(newValue ? newValue.value : "")
-              }
-              renderInput={(params) => (
+        <Container maxWidth="sm">
+          <Typography variant="h4" gutterBottom sx={{ color: "white" }}>
+            User Registration
+          </Typography>
+          {/* Inner Box with form elements */}
+          <Box
+            sx={{
+              padding: 3,
+              border: `1px solid ${theme.palette.grey[300]}`,
+              borderRadius: 2,
+              boxShadow: 2,
+              backgroundColor: "background.paper",
+            }}
+          >
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
                 <TextField
-                  {...params}
-                  label="Education"
-                  error={error && education === ""}
+                  fullWidth
+                  label="First Name"
+                  value={firstname}
+                  onChange={changeFirst}
+                  error={error && firstname === ""}
                   helperText={
-                    error && education === ""
-                      ? "Please choose your education"
+                    error && firstname === ""
+                      ? "Please enter your first name"
                       : ""
                   }
                 />
-              )}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <Grid container spacing={2}>
-              <Grid item>
-                <Button variant="contained" color="primary" onClick={trynext}>
-                  Next
-                </Button>
               </Grid>
-              <Grid item>
-                <Button variant="outlined" onClick={reset}>
-                  Reset
-                </Button>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  label="Last Name"
+                  value={lastname}
+                  onChange={changeLast}
+                  error={error && lastname === ""}
+                  helperText={
+                    error && lastname === ""
+                      ? "Please enter your last name"
+                      : ""
+                  }
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  label="Phone Number"
+                  value={number}
+                  onChange={changeNum}
+                  error={error && (number === "" || number.length < 10)}
+                  helperText={
+                    error && (number === "" || number.length < 10)
+                      ? "Please enter a valid phone number"
+                      : ""
+                  }
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  label="Email Address"
+                  value={email}
+                  onChange={changeEmail}
+                  error={error && (email === "" || !isValidEmailAddress(email))}
+                  helperText={
+                    error && (email === "" || !isValidEmailAddress(email))
+                      ? "Please enter a valid email address"
+                      : ""
+                  }
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FormControl
+                  component="fieldset"
+                  error={error && gender === undefined}
+                >
+                  <FormLabel component="legend">Gender</FormLabel>
+                  <RadioGroup
+                    row
+                    value={gender}
+                    onChange={(e) => setGender(e.target.value)}
+                  >
+                    <FormControlLabel
+                      value="Male"
+                      control={<Radio />}
+                      label="Male"
+                    />
+                    <FormControlLabel
+                      value="Female"
+                      control={<Radio />}
+                      label="Female"
+                    />
+                  </RadioGroup>
+                </FormControl>
+              </Grid>
+              <Grid item xs={12}>
+                <Autocomplete
+                  options={educationlist}
+                  getOptionLabel={(option) => option.label}
+                  value={
+                    educationlist.find((edu) => edu.value === education) || null
+                  }
+                  onChange={(event, newValue) =>
+                    setEducation(newValue ? newValue.value : "")
+                  }
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Education"
+                      error={error && education === ""}
+                      helperText={
+                        error && education === ""
+                          ? "Please choose your education"
+                          : ""
+                      }
+                    />
+                  )}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Grid container spacing={2}>
+                  <Grid item>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={trynext}
+                    >
+                      Next
+                    </Button>
+                  </Grid>
+                  <Grid item>
+                    <Button variant="outlined" onClick={reset}>
+                      Reset
+                    </Button>
+                  </Grid>
+                </Grid>
               </Grid>
             </Grid>
-          </Grid>
-        </Grid>
+          </Box>
+        </Container>
       </Box>
-    </Container>
+    </ThemeProvider>
   );
 };
 

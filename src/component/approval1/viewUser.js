@@ -1,20 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   TextField,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-  FormControl,
-  FormLabel,
-  Autocomplete,
   Button,
   Grid,
   Container,
   Typography,
   Box,
 } from "@mui/material";
+import { ThemeProvider, useTheme } from "@mui/material/styles";
+import { blue } from "@mui/material/colors";
 
 const ViewUser = ({ next }) => {
+  const theme = useTheme(); // Use the theme defined in your application
+
   const firstName = "First Name";
   const lastName = "Last Name";
   const number = "Number";
@@ -23,110 +21,117 @@ const ViewUser = ({ next }) => {
   const education = "Education";
 
   return (
-    <Container maxWidth="sm">
-      <Box
-        sx={{
-          marginBottom: 2,
-          transform: "translate(-27%, 0%)",
-        }}
-      >
-        <Typography
-          variant="h5"
-          gutterBottom
-          display="inline"
-          padding={1}
-          border="1px solid #ccc"
-          borderRadius={2}
-          boxShadow={2}
-          backgroundColor="#a9a9a9"
-          color="white"
+    <ThemeProvider theme={theme}>
+      {/* Background gradient covering the entire page */}
+      <Container maxWidth="sm">
+        {/* Header with two tabs: View User and View Project */}
+        <Box
+          sx={{ display: "flex", justifyContent: "center", marginBottom: 2 }}
         >
-          View User
-        </Typography>
-        <Typography
-          variant="h5"
-          gutterBottom
-          display="inline"
-          padding={1}
-          border="1px solid #ccc"
-          borderRadius={2}
-          boxShadow={2}
-          color="grey"
-        >
-          View Project
-        </Typography>
-      </Box>
-      <Box
-        sx={{
-          padding: 3,
-          border: "1px solid #ccc",
-          borderRadius: 2,
-          boxShadow: 2,
-          marginBottom: 2,
-          transform: "translate(-27%, 0%)",
-        }}
-      >
-        <TextField
-          label={firstName}
-          variant="outlined"
-          fullWidth
-          value={firstName}
-          disabled
-          sx={{ marginBottom: 2 }}
-        />
-        <TextField
-          label={lastName}
-          variant="outlined"
-          fullWidth
-          value={lastName}
-          disabled
-          sx={{ marginBottom: 2 }}
-        />
-        <TextField
-          label={number}
-          variant="outlined"
-          fullWidth
-          value={number}
-          disabled
-          sx={{ marginBottom: 2 }}
-        />
-        <TextField
-          label={email}
-          variant="outlined"
-          fullWidth
-          value={email}
-          disabled
-          sx={{ marginBottom: 2 }}
-        />
-        <TextField
-          label={gender}
-          variant="outlined"
-          fullWidth
-          value={gender}
-          disabled
-          sx={{ marginBottom: 2 }}
-        />
-        <TextField
-          label={education}
-          variant="outlined"
-          fullWidth
-          value={education}
-          disabled
-          sx={{ marginBottom: 2 }}
-        />
-      </Box>
-      <Grid container spacing={2}>
-        <Grid item>
-          <Button
-            variant="outlined"
-            onClick={next}
-            sx={{ transform: "translate(-217%, 0%)" }}
+          <Typography
+            variant="h5"
+            sx={{
+              padding: 1,
+              border: `1px solid ${theme.palette.grey[300]}`,
+              borderRadius: 2,
+              boxShadow: 2,
+              backgroundColor: theme.palette.primary.main, // Using primary color
+              color: "white",
+              marginRight: 2,
+            }}
           >
-            Next
-          </Button>
+            View User
+          </Typography>
+          <Typography
+            variant="h5"
+            sx={{
+              padding: 1,
+              border: `1px solid ${theme.palette.grey[300]}`,
+              borderRadius: 2,
+              boxShadow: 2,
+              backgroundColor: theme.palette.grey[300], // Using grey color for inactive tab
+              color: theme.palette.text.secondary,
+            }}
+          >
+            View Project
+          </Typography>
+        </Box>
+
+        {/* User Details Display */}
+        <Box
+          sx={{
+            padding: 3,
+            border: `1px solid ${theme.palette.grey[300]}`,
+            borderRadius: 2,
+            boxShadow: 2,
+            marginBottom: 4,
+            backgroundColor: theme.palette.background.paper, // Using the background paper color
+          }}
+        >
+          <TextField
+            label={firstName}
+            variant="outlined"
+            fullWidth
+            value={firstName}
+            disabled
+            sx={{ marginBottom: 2 }}
+          />
+          <TextField
+            label={lastName}
+            variant="outlined"
+            fullWidth
+            value={lastName}
+            disabled
+            sx={{ marginBottom: 2 }}
+          />
+          <TextField
+            label={number}
+            variant="outlined"
+            fullWidth
+            value={number}
+            disabled
+            sx={{ marginBottom: 2 }}
+          />
+          <TextField
+            label={email}
+            variant="outlined"
+            fullWidth
+            value={email}
+            disabled
+            sx={{ marginBottom: 2 }}
+          />
+          <TextField
+            label={gender}
+            variant="outlined"
+            fullWidth
+            value={gender}
+            disabled
+            sx={{ marginBottom: 2 }}
+          />
+          <TextField
+            label={education}
+            variant="outlined"
+            fullWidth
+            value={education}
+            disabled
+          />
+        </Box>
+
+        {/* Next Button */}
+        <Grid container justifyContent="center">
+          <Grid item>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={next}
+              sx={{ boxShadow: 2 }}
+            >
+              Next
+            </Button>
+          </Grid>
         </Grid>
-      </Grid>
-    </Container>
+      </Container>
+    </ThemeProvider>
   );
 };
 

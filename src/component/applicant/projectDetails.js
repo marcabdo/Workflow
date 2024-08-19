@@ -8,6 +8,40 @@ import {
   Typography,
   Box,
 } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import "@fontsource/roboto"; // Import Roboto font
+
+// Define your theme with the chosen color palette and font settings
+const theme = createTheme({
+  typography: {
+    fontFamily: "Roboto, Arial, sans-serif",
+    h4: {
+      fontWeight: 700, // Bold for headings
+    },
+    body1: {
+      fontWeight: 400, // Regular for body text
+    },
+  },
+  palette: {
+    primary: {
+      main: "#003366", // Navy Blue
+    },
+    secondary: {
+      main: "#4169E1", // Royal Blue
+    },
+    text: {
+      primary: "#000000", // Black for primary text
+      secondary: "#4D4D4D", // Dark Gray for secondary text
+    },
+    background: {
+      default: "#FFFFFF", // White background
+      paper: "#F8F8F8", // Light Gray for paper elements
+    },
+    grey: {
+      300: "#D3D3D3", // Light Gray
+    },
+  },
+});
 
 const ProjectDetails = ({ prev, next, appSession }) => {
   const projectDetails = appSession.application.projectDetails;
@@ -36,36 +70,31 @@ const ProjectDetails = ({ prev, next, appSession }) => {
   ];
 
   const locationList = [
-    { value: "Hyderabad", label: "Bangalore" },
     { value: "Hyderabad", label: "Hyderabad" },
+    { value: "Bangalore", label: "Bangalore" },
     { value: "Chennai", label: "Chennai" },
   ];
 
   const changeProjectName = (event) => {
-    const newProjectName = event.target.value;
-    setProjectName(newProjectName);
+    setProjectName(event.target.value);
   };
 
   const changeProjectNumber = (event) => {
-    const newProjectNumber = event.target.value;
-    setProjectNumber(newProjectNumber);
+    setProjectNumber(event.target.value);
   };
 
   const changeProjectDescription = (event) => {
-    const newProjectDescription = event.target.value;
-    setProjectDescription(newProjectDescription);
+    setProjectDescription(event.target.value);
   };
 
   const changeStartDate = (event) => {
-    const newStartDate = event.target.value;
-    setStartDate(newStartDate);
+    setStartDate(event.target.value);
   };
 
   const changeEndDate = (event) => {
-    const newEndDate = event.target.value;
-    setEndDate(newEndDate);
+    setEndDate(event.target.value);
   };
-  // Reset button values
+
   const reset = () => {
     setProjectType("");
     setProjectName("");
@@ -77,7 +106,7 @@ const ProjectDetails = ({ prev, next, appSession }) => {
   };
 
   const test = () => {
-    if (
+    return (
       projectType === "" ||
       projectName === "" ||
       projectNumber === "" ||
@@ -85,15 +114,9 @@ const ProjectDetails = ({ prev, next, appSession }) => {
       startDate === "" ||
       endDate === "" ||
       location === ""
-    ) {
-      setError(true);
-      return true;
-    } else {
-      setError(false);
-      return false;
-    }
+    );
   };
-  // Test function for determining all of the inputs are valid, if valid save data in projectDetails
+
   const trynext = () => {
     const hasError = test();
     setError(hasError);
@@ -110,156 +133,182 @@ const ProjectDetails = ({ prev, next, appSession }) => {
   };
 
   return (
-    <Container maxWidth="sm">
-      <Typography variant="h4" gutterBottom>
-        Project Details
-      </Typography>
+    <ThemeProvider theme={theme}>
+      {/* Background gradient covering the entire page */}
       <Box
         sx={{
-          padding: 3,
-          border: "1px solid #ccc",
-          borderRadius: 2,
-          boxShadow: 2,
+          backgroundImage: "linear-gradient(135deg, #003366, #4169E1)", // Navy Blue to Royal Blue gradient
+          minHeight: "100vh", // Ensures gradient covers the full height of the viewport
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <Autocomplete
-              options={projectTypeList}
-              getOptionLabel={(option) => option.label}
-              value={
-                projectTypeList.find((type) => type.value === projectType) ||
-                null
-              }
-              onChange={(event, newValue) =>
-                setProjectType(newValue ? newValue.value : "")
-              }
-              renderInput={(params) => (
+        <Container maxWidth="sm">
+          <Typography variant="h4" gutterBottom sx={{ color: "white" }}>
+            Project Details
+          </Typography>
+          {/* Inner Box with form elements */}
+          <Box
+            sx={{
+              padding: 3,
+              border: `1px solid ${theme.palette.grey[300]}`,
+              borderRadius: 2,
+              boxShadow: 2,
+              backgroundColor: "background.paper",
+            }}
+          >
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <Autocomplete
+                  options={projectTypeList}
+                  getOptionLabel={(option) => option.label}
+                  value={
+                    projectTypeList.find(
+                      (type) => type.value === projectType
+                    ) || null
+                  }
+                  onChange={(event, newValue) =>
+                    setProjectType(newValue ? newValue.value : "")
+                  }
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Project Type"
+                      error={error && projectType === ""}
+                      helperText={
+                        error && projectType === ""
+                          ? "Please choose a project type"
+                          : ""
+                      }
+                    />
+                  )}
+                />
+              </Grid>
+              <Grid item xs={12}>
                 <TextField
-                  {...params}
-                  label="Project Type"
-                  error={error && projectType === ""}
+                  fullWidth
+                  label="Project Name"
+                  value={projectName}
+                  onChange={changeProjectName}
+                  error={error && projectName === ""}
                   helperText={
-                    error && projectType === ""
-                      ? "Please choose a project type"
+                    error && projectName === ""
+                      ? "Please enter a project name"
                       : ""
                   }
                 />
-              )}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              label="Project Name"
-              value={projectName}
-              onChange={changeProjectName}
-              error={error && projectName === ""}
-              helperText={
-                error && projectName === "" ? "Please enter a project name" : ""
-              }
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              label="Project Number"
-              value={projectNumber}
-              onChange={changeProjectNumber}
-              error={error && projectNumber === ""}
-              helperText={
-                error && projectNumber === ""
-                  ? "Please enter a valid project number"
-                  : ""
-              }
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              label="Project Description"
-              value={projectDescription}
-              onChange={changeProjectDescription}
-              error={error && projectDescription === ""}
-              helperText={
-                error && projectDescription === ""
-                  ? "Please enter a project description"
-                  : ""
-              }
-              multiline
-              rows={4}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              label="Start Date"
-              type="date"
-              InputLabelProps={{ shrink: true }}
-              value={startDate}
-              onChange={changeStartDate}
-              error={error && startDate === ""}
-              helperText={
-                error && startDate === "" ? "Please enter a start date" : ""
-              }
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              label="End Date"
-              type="date"
-              InputLabelProps={{ shrink: true }}
-              value={endDate}
-              onChange={changeEndDate}
-              error={error && endDate === ""}
-              helperText={
-                error && endDate === "" ? "Please enter an end date" : ""
-              }
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <Autocomplete
-              options={locationList}
-              getOptionLabel={(option) => option.label}
-              value={locationList.find((loc) => loc.value === location) || null}
-              onChange={(event, newValue) =>
-                setLocation(newValue ? newValue.value : "")
-              }
-              renderInput={(params) => (
+              </Grid>
+              <Grid item xs={12}>
                 <TextField
-                  {...params}
-                  label="Location"
-                  error={error && location === ""}
+                  fullWidth
+                  label="Project Number"
+                  value={projectNumber}
+                  onChange={changeProjectNumber}
+                  error={error && projectNumber === ""}
                   helperText={
-                    error && location === "" ? "Please choose a location" : ""
+                    error && projectNumber === ""
+                      ? "Please enter a valid project number"
+                      : ""
                   }
                 />
-              )}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <Grid container spacing={2}>
-              <Grid item>
-                <Button variant="outlined" onClick={prev}>
-                  Previous
-                </Button>
               </Grid>
-              <Grid item>
-                <Button variant="contained" color="primary" onClick={trynext}>
-                  Next
-                </Button>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  label="Project Description"
+                  value={projectDescription}
+                  onChange={changeProjectDescription}
+                  error={error && projectDescription === ""}
+                  helperText={
+                    error && projectDescription === ""
+                      ? "Please enter a project description"
+                      : ""
+                  }
+                  multiline
+                  rows={4}
+                />
               </Grid>
-              <Grid item>
-                <Button variant="outlined" onClick={reset}>
-                  Reset
-                </Button>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  label="Start Date"
+                  type="date"
+                  InputLabelProps={{ shrink: true }}
+                  value={startDate}
+                  onChange={changeStartDate}
+                  error={error && startDate === ""}
+                  helperText={
+                    error && startDate === "" ? "Please enter a start date" : ""
+                  }
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  label="End Date"
+                  type="date"
+                  InputLabelProps={{ shrink: true }}
+                  value={endDate}
+                  onChange={changeEndDate}
+                  error={error && endDate === ""}
+                  helperText={
+                    error && endDate === "" ? "Please enter an end date" : ""
+                  }
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Autocomplete
+                  options={locationList}
+                  getOptionLabel={(option) => option.label}
+                  value={
+                    locationList.find((loc) => loc.value === location) || null
+                  }
+                  onChange={(event, newValue) =>
+                    setLocation(newValue ? newValue.value : "")
+                  }
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Location"
+                      error={error && location === ""}
+                      helperText={
+                        error && location === ""
+                          ? "Please choose a location"
+                          : ""
+                      }
+                    />
+                  )}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Grid container spacing={2}>
+                  <Grid item>
+                    <Button variant="outlined" onClick={prev}>
+                      Previous
+                    </Button>
+                  </Grid>
+                  <Grid item>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={trynext}
+                    >
+                      Next
+                    </Button>
+                  </Grid>
+                  <Grid item>
+                    <Button variant="outlined" onClick={reset}>
+                      Reset
+                    </Button>
+                  </Grid>
+                </Grid>
               </Grid>
             </Grid>
-          </Grid>
-        </Grid>
+          </Box>
+        </Container>
       </Box>
-    </Container>
+    </ThemeProvider>
   );
 };
 

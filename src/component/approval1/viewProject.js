@@ -1,12 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   TextField,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-  FormControl,
-  FormLabel,
-  Autocomplete,
   Button,
   Grid,
   Container,
@@ -25,46 +19,43 @@ const ViewProject = ({ prev }) => {
 
   return (
     <Container maxWidth="sm">
-      <Box
-        sx={{
-          marginBottom: 2,
-          transform: "translate(-27%, 0%)",
-        }}
-      >
+      <Box sx={{ display: "flex", justifyContent: "center", marginBottom: 2 }}>
         <Typography
           variant="h5"
-          gutterBottom
-          display="inline"
-          padding={1}
-          border="1px solid #ccc"
-          borderRadius={2}
-          boxShadow={2}
-          color="grey"
+          sx={{
+            padding: 1,
+            border: "1px solid #ccc",
+            borderRadius: 2,
+            boxShadow: 2,
+            color: "grey",
+            marginRight: 2,
+          }}
         >
           View User
         </Typography>
         <Typography
           variant="h5"
-          gutterBottom
-          display="inline"
-          padding={1}
-          border="1px solid #ccc"
-          borderRadius={2}
-          boxShadow={2}
-          backgroundColor="#a9a9a9"
-          color="white"
+          sx={{
+            padding: 1,
+            border: "1px solid #ccc",
+            borderRadius: 2,
+            boxShadow: 2,
+            backgroundColor: "#a9a9a9",
+            color: "white",
+          }}
         >
           View Project
         </Typography>
       </Box>
+
       <Box
         sx={{
           padding: 3,
           border: "1px solid #ccc",
           borderRadius: 2,
           boxShadow: 2,
-          marginBottom: 2,
-          transform: "translate(-27%, 0%)",
+          marginBottom: 4,
+          backgroundColor: "white", // Ensure the background is white
         }}
       >
         <TextField
@@ -113,16 +104,13 @@ const ViewProject = ({ prev }) => {
           fullWidth
           value={location}
           disabled
-          sx={{ marginBottom: 2 }}
         />
       </Box>
-      <Grid container spacing={2}>
+
+      {/* Back Button */}
+      <Grid container justifyContent="center">
         <Grid item>
-          <Button
-            variant="outlined"
-            onClick={prev}
-            sx={{ transform: "translate(-217%, 0%)" }}
-          >
+          <Button variant="outlined" onClick={prev}>
             Back
           </Button>
         </Grid>
