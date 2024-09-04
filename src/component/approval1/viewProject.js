@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
+import ViewApplication from "./viewApplication.js";
+import Attachments from "./attachments.js";
+import Comments from "./comments.js";
+import Reply from "./reply.js";
 import {
-  TextField,
   Button,
-  Grid,
   Container,
-  Typography,
+  Grid,
   Box,
+  AppBar,
+  Toolbar,
+  Typography,
+  TextField,
 } from "@mui/material";
-import { ThemeProvider, useTheme } from "@mui/material/styles";
+import { createTheme, useTheme, ThemeProvider } from "@mui/material/styles";
+import "@fontsource/roboto"; // Import Roboto font
 
 const ViewProject = ({ prev }) => {
   const projectType = "Project Type";
@@ -20,7 +27,7 @@ const ViewProject = ({ prev }) => {
   const theme = useTheme();
 
   return (
-    <ThemeProvider>
+    <ThemeProvider theme={theme}>
       <Container maxWidth="sm">
         <Box
           sx={{ display: "flex", justifyContent: "center", marginBottom: 2 }}

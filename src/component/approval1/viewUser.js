@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
+import ViewApplication from "./viewApplication.js";
+import Attachments from "./attachments.js";
+import Comments from "./comments.js";
+import Reply from "./reply.js";
 import {
-  TextField,
   Button,
-  Grid,
   Container,
-  Typography,
+  Grid,
   Box,
+  AppBar,
+  Toolbar,
+  Typography,
+  TextField,
 } from "@mui/material";
-import { ThemeProvider, useTheme } from "@mui/material/styles";
-import { blue } from "@mui/material/colors";
+import { createTheme, useTheme, ThemeProvider } from "@mui/material/styles";
+import "@fontsource/roboto"; // Import Roboto font
 
 const ViewUser = ({ next }) => {
   const theme = useTheme(); // Use the theme defined in your application
