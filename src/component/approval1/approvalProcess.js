@@ -73,89 +73,69 @@ const ApprovalProcess = () => {
         }}
       >
         {/* AppBar containing the buttons */}
-        <AppBar
-          position="static"
-          sx={{
-            backgroundColor: theme.palette.primary.main,
-            boxShadow: 3,
-          }}
-        >
-          <Toolbar>
-            <Grid container spacing={2} justifyContent="center">
-              <Grid item>
-                <Button
-                  variant={page === 1 ? "contained" : "outlined"}
-                  color="secondary"
-                  onClick={() => setPage(1)}
-                  sx={{
-                    fontSize: "1rem",
-                    padding: "10px 20px",
-                  }}
-                >
-                  View Application
-                </Button>
-              </Grid>
-              <Grid item>
-                <Button
-                  variant={page === 2 ? "contained" : "outlined"}
-                  color="secondary"
-                  onClick={() => setPage(2)}
-                  sx={{
-                    fontSize: "1rem",
-                    padding: "10px 20px",
-                  }}
-                >
-                  Comments
-                </Button>
-              </Grid>
-              <Grid item>
-                <Button
-                  variant={page === 3 ? "contained" : "outlined"}
-                  color="secondary"
-                  onClick={() => setPage(3)}
-                  sx={{
-                    fontSize: "1rem",
-                    padding: "10px 20px",
-                  }}
-                >
-                  Attachments
-                </Button>
-              </Grid>
-              <Grid item>
-                <Button
-                  variant={page === 4 ? "contained" : "outlined"}
-                  color="secondary"
-                  onClick={() => setPage(4)}
-                  sx={{
-                    fontSize: "1rem",
-                    padding: "10px 20px",
-                  }}
-                >
-                  Reply
-                </Button>
-              </Grid>
+
+        <Toolbar>
+          <Grid container spacing={2} justifyContent="center">
+            <Grid item>
+              <Button
+                variant={page === 1 ? "contained" : "outlined"}
+                color="secondary"
+                onClick={() => setPage(1)}
+                sx={{
+                  fontSize: "1rem",
+                  padding: "10px 20px",
+                }}
+              >
+                View Application
+              </Button>
             </Grid>
-          </Toolbar>
-        </AppBar>
+            <Grid item>
+              <Button
+                variant={page === 2 ? "contained" : "outlined"}
+                color="secondary"
+                onClick={() => setPage(2)}
+                sx={{
+                  fontSize: "1rem",
+                  padding: "10px 20px",
+                }}
+              >
+                Comments
+              </Button>
+            </Grid>
+            <Grid item>
+              <Button
+                variant={page === 3 ? "contained" : "outlined"}
+                color="secondary"
+                onClick={() => setPage(3)}
+                sx={{
+                  fontSize: "1rem",
+                  padding: "10px 20px",
+                }}
+              >
+                Attachments
+              </Button>
+            </Grid>
+            <Grid item>
+              <Button
+                variant={page === 4 ? "contained" : "outlined"}
+                color="secondary"
+                onClick={() => setPage(4)}
+                sx={{
+                  fontSize: "1rem",
+                  padding: "10px 20px",
+                }}
+              >
+                Reply
+              </Button>
+            </Grid>
+          </Grid>
+        </Toolbar>
 
         {/* Main content area */}
-        <Container
-          maxWidth="md"
-          sx={{
-            marginTop: 4,
-            flexGrow: 1,
-            ...(applyGradient && {
-              backgroundColor: "rgba(255, 255, 255, 0.8)", // Slight transparency to create a card-like effect on top of the gradient
-              borderRadius: 2,
-              boxShadow: 3,
-              padding: 4,
-            }),
-          }}
-        >
-          <Box sx={{ marginTop: 4 }}>
-            <div className="page">{renderPage()}</div>
-          </Box>
-        </Container>
+
+        <Box sx={{ marginTop: 4 }}>
+          <div className="page">{renderPage()}</div>
+        </Box>
       </Box>
     </ThemeProvider>
   );

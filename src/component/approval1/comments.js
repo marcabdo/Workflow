@@ -67,7 +67,7 @@ Also sets comment text box to an empty string to prepare for new comments
                 position: "absolute",
                 transform: "translate(-50%, -50%)",
                 width: 400,
-                bgcolor: "background.paper",
+                backgroundColor: "white",
               }}
             >
               <Typography variant="h6" gutterBottom>
@@ -112,6 +112,7 @@ Also sets comment text box to an empty string to prepare for new comments
           borderRadius: 2,
           boxShadow: 2,
           transform: "translate(-3%, 0%)",
+          backgroundColor: "white",
         }}
       >
         <DataGrid
@@ -143,7 +144,7 @@ Also sets comment text box to an empty string to prepare for new comments
                 transform: "translate(-50%, -50%)",
                 width: 700,
                 height: 400,
-                bgcolor: "background.paper",
+                backgroundColor: "white",
               }}
             >
               <Typography variant="h6" gutterBottom>

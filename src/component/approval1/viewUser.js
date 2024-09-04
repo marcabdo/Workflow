@@ -49,7 +49,7 @@ const ViewUser = ({ next }) => {
               border: `1px solid ${theme.palette.grey[300]}`,
               borderRadius: 2,
               boxShadow: 2,
-              backgroundColor: theme.palette.grey[300], // Using grey color for inactive tab
+              backgroundColor: "white", // Using grey color for inactive tab
               color: theme.palette.text.secondary,
             }}
           >
@@ -115,21 +115,13 @@ const ViewUser = ({ next }) => {
             value={education}
             disabled
           />
-        </Box>
 
-        {/* Next Button */}
-        <Grid container justifyContent="center">
           <Grid item>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={next}
-              sx={{ boxShadow: 2 }}
-            >
+            <Button variant="contained" color="primary" onClick={next}>
               Next
             </Button>
           </Grid>
-        </Grid>
+        </Box>
       </Container>
     </ThemeProvider>
   );

@@ -104,6 +104,7 @@ const Attachements = () => {
           boxShadow: 2,
           height: "auto",
           transform: "translate(-3%, 0%)",
+          backgroundColor: "white",
         }}
       >
         <DataGrid

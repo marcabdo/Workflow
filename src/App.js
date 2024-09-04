@@ -9,32 +9,59 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
-import { Button } from "@mui/material";
+import {
+  Button,
+  Typography,
+  DataGrid,
+  AppBar,
+  Grid,
+  Toolbar,
+  Container,
+} from "@mui/material";
+
+// Define your theme with the chosen color palette and font settings
+const theme = createTheme({
+  typography: {
+    fontFamily: "Roboto, Arial, sans-serif",
+    h4: {
+      fontWeight: 700, // Bold for headings
+    },
+    body1: {
+      fontWeight: 400, // Regular for body text
+    },
+  },
+  palette: {
+    primary: {
+      main: "#003366", // Navy Blue
+    },
+    secondary: {
+      main: "#4169E1", // Royal Blue
+    },
+    text: {
+      primary: "#000000", // Black for primary text
+      secondary: "#4D4D4D", // Dark Gray for secondary text
+    },
+    background: {
+      default: "#FFFFFF", // White background
+      paper: "#F8F8F8", // Light Gray for paper elements
+    },
+    grey: {
+      300: "#D3D3D3", // Light Gray
+    },
+  },
+});
 
 function App() {
-  const [darkMode, setDarkMode] = useState("light");
-  const darkTheme = createTheme({
-    palette: {
-      mode: darkMode,
-    },
-  });
-  const toggleMode = () => {
-    setDarkMode(darkMode === "light" ? "dark" : "light");
-  };
-
   return (
     <div>
-      <Button onClick={toggleMode}>Light/Dark</Button>
-      <BrowserRouter>
-        <ThemeProvider theme={darkTheme}>
-          <CssBaseline />
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
           <Routes>
             <Route path="/" element={<Application />} />
             <Route path="/21" element={<ApprovalProcess />} />
           </Routes>
-        </ThemeProvider>
-      </BrowserRouter>
+        </BrowserRouter>
+      </ThemeProvider>
     </div>
   );
 }
